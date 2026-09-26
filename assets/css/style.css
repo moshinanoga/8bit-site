@@ -979,7 +979,7 @@ body.tiffany-glow{--accent:#2dd9c4;--accent-2:#4de8d6;--on-accent:#04241d}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .news-filter.is-active{background:var(--teal-accent);color:#04241d;border-color:var(--teal-accent)}}
 
 /* ---------- News: editorial grid + card types ---------- */
-.news-editorial{margin-top:36px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:20px}
+.news-editorial{margin-top:28px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:18px}
 /* light-theme-first card: white/cool-gray surface with a real border+shadow,
    graphite text — the old permanently-dark (#161a1e/white-text) card read as
    a foreign, over-heavy component dropped into an otherwise light, airy page.
@@ -994,40 +994,46 @@ body.tiffany-glow{--accent:#2dd9c4;--accent-2:#4de8d6;--on-accent:#04241d}
 .news-card h3{position:relative;z-index:1;margin-top:16px;font-weight:800;font-family:var(--font-ui);line-height:1.3;letter-spacing:-.01em;color:var(--ink)}
 .news-card p{position:relative;z-index:1;margin-top:10px;font-size:16.5px;line-height:1.65;color:var(--ink-soft);flex:1}
 .news-card b{position:relative;z-index:1;margin-top:18px;display:inline-flex;align-items:center;gap:6px;color:var(--news-accent,var(--teal-accent));font-weight:700;font-size:15px}
-.news-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--news-accent,var(--teal-accent));opacity:.85}
+/* the color-coded left stripe is now reserved for compact (image-less) cards
+   only — cards that already carry a full illustrated cover get their identity
+   from that art instead, so the shell doesn't repeat the same tell on every card */
+.news-card.size-compact::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--news-accent,var(--teal-accent));opacity:.85}
 /* size variants — editorial rhythm instead of a uniform grid of equal boxes.
    Selectors target the size-* class alone (not `.news-card.size-*`) because
    video items use a different base class (.news-video-card) but share the
    same grid and need the same column-span placement. */
 .size-featured{grid-column:1 / -1}
-.news-card.size-featured{flex-direction:row;align-items:stretch;gap:0;padding:0}
+.news-card.size-featured{flex-direction:row;align-items:stretch;gap:0;padding:0;background:linear-gradient(120deg,color-mix(in srgb,var(--news-accent,var(--teal-accent)) 7%,var(--surface)),var(--surface) 55%)}
 .news-card.size-featured .news-card-copy{flex:1;min-width:0;padding:clamp(28px,3vw,44px)}
 .news-card.size-featured h3{font-size:clamp(26px,2.6vw,36px);max-width:640px}
 .news-card.size-featured p{max-width:560px;font-size:17px}
 .size-medium{grid-column:span 3}
-.news-card.size-medium h3{font-size:22px}
+.news-card.size-medium h3{font-size:21px}
+.news-card.size-medium.compose-side{flex-direction:row;align-items:stretch;gap:0;padding:0}
+.news-card.size-medium.compose-side .news-card-copy{flex:1;min-width:0;padding:24px}
+.news-card.size-medium.compose-side .news-cover{width:42%;margin:0}
 .size-compact{grid-column:span 2}
-.news-card.size-compact h3{font-size:20px}
+.news-card.size-compact h3{font-size:19px}
 .news-card.size-compact p{display:none}
 .size-video{grid-column:span 3;padding:0}
-@media(max-width:980px){.news-card.size-featured{flex-direction:column;align-items:stretch}.news-card.size-featured .news-cover{width:100%;height:180px}.size-medium,.size-compact,.size-video{grid-column:1/-1}}
+@media(max-width:980px){.news-card.size-featured{flex-direction:column;align-items:stretch}.news-card.size-featured .news-cover{width:100%;height:180px}.news-card.size-medium.compose-side{flex-direction:column}.news-card.size-medium.compose-side .news-cover{width:100%;height:150px;margin:-26px -26px 18px}.size-medium,.size-compact,.size-video{grid-column:1/-1}}
 
-/* per-category illustrated cover — a distinct abstract composition per
-   category (not the same lone icon recolored) so featured/medium cards read
-   as a real editorial layout instead of identical boxes. Compact cards skip
-   it on purpose: there isn't room for an illustration once text is legible. */
-.news-cover{position:relative;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,color-mix(in srgb,var(--news-accent,var(--teal-accent)) 22%,var(--surface-2)),var(--surface-2) 80%)}
+/* per-category illustrated cover — a full illustrated scene (gradient depth +
+   glow + layered filled shapes), not a lone stroked icon centred in empty
+   space. Compact cards skip it on purpose: not enough room once text is legible. */
+.news-cover{position:relative;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,color-mix(in srgb,var(--news-accent,var(--teal-accent)) 26%,var(--surface-2)),var(--surface-2) 85%)}
+.news-cover::before{content:'';position:absolute;width:60%;height:60%;left:-10%;top:-15%;border-radius:50%;background:color-mix(in srgb,var(--news-accent,var(--teal-accent)) 55%,transparent);filter:blur(30px);opacity:.5;pointer-events:none}
 .news-cover::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 25% 15%,rgba(255,255,255,.5),transparent 60%);mix-blend-mode:overlay;pointer-events:none}
-:root[data-theme="dark"] .news-cover::after{background:radial-gradient(ellipse 60% 50% at 25% 15%,rgba(255,255,255,.16),transparent 60%)}
-.news-cover svg{position:relative;z-index:1;width:78%;height:78%;color:var(--news-accent,var(--teal-accent))}
-.news-card:hover .news-cover svg{transform:scale(1.04)}
-.news-cover svg{transition:transform .4s cubic-bezier(.22,1,.36,1)}
-.news-card.size-medium .news-cover{height:150px;margin:-26px -26px 18px}
+:root[data-theme="dark"] .news-cover::after{background:radial-gradient(ellipse 60% 50% at 25% 15%,rgba(255,255,255,.14),transparent 60%)}
+.news-cover svg{position:relative;z-index:1;width:88%;height:88%;transition:transform .4s cubic-bezier(.22,1,.36,1)}
+.news-card:hover .news-cover svg{transform:scale(1.045)}
+.news-card.size-medium .news-cover{height:170px;margin:-26px -26px 18px}
 .news-card.size-featured .news-cover{width:36%}
 @media(max-width:560px){.news-card.size-featured{flex-direction:column}.news-card.size-featured .news-cover{width:100%;height:160px}}
 
 /* ---------- News video section: large horizontal cards, own block below the grid ---------- */
-.news-video-section{margin-top:64px}
+.news-video-section{margin-top:44px}
+.news-source-caption{margin-top:20px;padding:0 2px;font-size:13px;color:var(--muted)}
 .news-video-heading{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:24px}
 .news-video-heading h2{font-family:var(--font-ui);font-weight:800;font-size:clamp(24px,2.4vw,32px);letter-spacing:-.02em;color:var(--ink)}
 .news-video-heading span{font-family:var(--font-mono);font-size:14px;color:var(--muted)}
@@ -1037,7 +1043,8 @@ body.tiffany-glow{--accent:#2dd9c4;--accent-2:#4de8d6;--on-accent:#04241d}
 .news-video-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
 .case-body-text .news-video-card{margin:22px 0}
 @media(max-width:560px){.news-video-card{flex-direction:column}}
-.news-video-thumb{position:relative;flex:0 0 46%;aspect-ratio:4/3;overflow:hidden;background:linear-gradient(135deg,#161d24,#1c242d 55%,#0d1117)}
+.news-video-thumb{position:relative;flex:0 0 46%;aspect-ratio:4/3;overflow:hidden;background:linear-gradient(135deg,#183a3f,#153035 55%,#102428)}
+.news-video-thumb::before{content:'';position:absolute;width:70%;height:70%;left:-15%;top:-20%;border-radius:50%;background:radial-gradient(circle,rgba(45,217,196,.5),transparent 70%);filter:blur(28px);pointer-events:none}
 @media(max-width:560px){.news-video-thumb{flex:none;aspect-ratio:16/9}}
 .news-video-thumb svg.video-scene{position:absolute;inset:0;width:100%;height:100%;transition:transform .4s cubic-bezier(.22,1,.36,1)}
 .news-video-card:hover .news-video-thumb svg.video-scene{transform:scale(1.05)}
