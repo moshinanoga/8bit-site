@@ -971,12 +971,13 @@ body.tiffany-glow{--accent:#2dd9c4;--accent-2:#4de8d6;--on-accent:#04241d}
 .news-item-body .source-note{margin-top:14px;font-size:12.5px;color:#6b7690}
 
 /* ---------- News: category filter pills ---------- */
-.news-filters{position:relative;z-index:2;margin-top:32px;display:flex;flex-wrap:wrap;gap:10px}
-.news-filter{appearance:none;border:1.5px solid var(--glass-border);background:var(--glass-bg);backdrop-filter:blur(12px);color:var(--ink-soft);padding:10px 20px;border-radius:99px;font-family:var(--font-ui);font-size:14.5px;font-weight:700;cursor:pointer;transition:background .3s,border-color .3s,color .3s,transform .3s}
+/* sticky so these stay reachable once scrolled — they're interactive controls,
+   not decorative text, so letting the fixed header swallow them on scroll
+   (like it does to plain hero copy elsewhere) would hide a working control */
+.news-filters{position:sticky;top:104px;z-index:150;margin-top:32px;display:flex;flex-wrap:wrap;gap:10px}
+.news-filter{appearance:none;border:1.5px solid var(--glass-border);background:var(--glass-bg-strong);backdrop-filter:blur(16px);color:var(--ink-soft);padding:10px 20px;border-radius:99px;font-family:var(--font-ui);font-size:14.5px;font-weight:700;cursor:pointer;transition:background .3s,border-color .3s,color .3s,transform .3s;box-shadow:var(--shadow-sm)}
 .news-filter:hover{transform:translateY(-2px);border-color:var(--teal-accent)}
-.news-filter.is-active{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-:root[data-theme="dark"] .news-filter.is-active,body.dark .news-filter.is-active{background:var(--teal-accent);color:#04241d;border-color:var(--teal-accent)}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .news-filter.is-active{background:var(--teal-accent);color:#04241d;border-color:var(--teal-accent)}}
+.news-filter.is-active{background:var(--teal-accent);color:#04241d;border-color:var(--teal-accent);box-shadow:0 10px 24px rgba(45,217,196,.35)}
 
 /* ---------- News: editorial grid + card types ---------- */
 .news-editorial{margin-top:28px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:18px}
@@ -1007,29 +1008,30 @@ body.tiffany-glow{--accent:#2dd9c4;--accent-2:#4de8d6;--on-accent:#04241d}
 .news-card.size-featured .news-card-copy{flex:1;min-width:0;padding:clamp(28px,3vw,44px)}
 .news-card.size-featured h3{font-size:clamp(26px,2.6vw,36px);max-width:640px}
 .news-card.size-featured p{max-width:560px;font-size:17px}
+/* exactly two "medium" cards, identical structure (image-top, then copy) —
+   everything past them is compact (no illustration, same vertical shell) */
 .size-medium{grid-column:span 3}
 .news-card.size-medium h3{font-size:21px}
-.news-card.size-medium.compose-side{flex-direction:row;align-items:stretch;gap:0;padding:0}
-.news-card.size-medium.compose-side .news-card-copy{flex:1;min-width:0;padding:24px}
-.news-card.size-medium.compose-side .news-cover{width:42%;margin:0}
-.size-compact{grid-column:span 2}
+.size-compact{grid-column:span 3}
 .news-card.size-compact h3{font-size:19px}
-.news-card.size-compact p{display:none}
+.news-card.size-compact p{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
 .size-video{grid-column:span 3;padding:0}
-@media(max-width:980px){.news-card.size-featured{flex-direction:column;align-items:stretch}.news-card.size-featured .news-cover{width:100%;height:180px}.news-card.size-medium.compose-side{flex-direction:column}.news-card.size-medium.compose-side .news-cover{width:100%;height:150px;margin:-26px -26px 18px}.size-medium,.size-compact,.size-video{grid-column:1/-1}}
+@media(max-width:980px){.news-card.size-featured{flex-direction:column;align-items:stretch}.news-card.size-featured .news-cover{width:100%;height:200px}.size-medium,.size-compact,.size-video{grid-column:1/-1}}
 
 /* per-category illustrated cover — a full illustrated scene (gradient depth +
-   glow + layered filled shapes), not a lone stroked icon centred in empty
-   space. Compact cards skip it on purpose: not enough room once text is legible. */
-.news-cover{position:relative;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,color-mix(in srgb,var(--news-accent,var(--teal-accent)) 26%,var(--surface-2)),var(--surface-2) 85%)}
+   glow + layered filled shapes) that fills its box edge-to-edge (slice, not
+   letterboxed) so it reads as a real image area, not a small icon adrift in
+   empty padding. Compact cards skip it: no room once text stays legible. */
+.news-cover{position:relative;overflow:hidden;flex-shrink:0;display:block;background:linear-gradient(145deg,color-mix(in srgb,var(--news-accent,var(--teal-accent)) 26%,var(--surface-2)),var(--surface-2) 85%)}
 .news-cover::before{content:'';position:absolute;width:60%;height:60%;left:-10%;top:-15%;border-radius:50%;background:color-mix(in srgb,var(--news-accent,var(--teal-accent)) 55%,transparent);filter:blur(30px);opacity:.5;pointer-events:none}
 .news-cover::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 25% 15%,rgba(255,255,255,.5),transparent 60%);mix-blend-mode:overlay;pointer-events:none}
 :root[data-theme="dark"] .news-cover::after{background:radial-gradient(ellipse 60% 50% at 25% 15%,rgba(255,255,255,.14),transparent 60%)}
-.news-cover svg{position:relative;z-index:1;width:88%;height:88%;transition:transform .4s cubic-bezier(.22,1,.36,1)}
-.news-card:hover .news-cover svg{transform:scale(1.045)}
-.news-card.size-medium .news-cover{height:170px;margin:-26px -26px 18px}
-.news-card.size-featured .news-cover{width:36%}
-@media(max-width:560px){.news-card.size-featured{flex-direction:column}.news-card.size-featured .news-cover{width:100%;height:160px}}
+.news-cover svg{position:absolute;inset:0;z-index:1;width:100%;height:100%;transition:transform .4s cubic-bezier(.22,1,.36,1)}
+.news-card:hover .news-cover svg{transform:scale(1.04)}
+.news-card.size-featured{display:flex}
+.news-card.size-medium .news-cover{height:180px;margin:-26px -26px 18px}
+.news-card.size-featured .news-cover{width:38%;height:auto}
+@media(max-width:560px){.news-card.size-featured{flex-direction:column}.news-card.size-featured .news-cover{width:100%;height:200px}}
 
 /* ---------- News video section: large horizontal cards, own block below the grid ---------- */
 .news-video-section{margin-top:44px}
