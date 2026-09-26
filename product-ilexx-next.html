@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Айлекс.некст — мобильная касса на Android | 8-БИТ</title>
+<meta name="description" content="Айлекс.некст — кассовое ПО на Android для розницы, услуг и общепита: маркировка, ЕГАИС, СБП, разливные напитки. Продажа и внедрение — ВЦ 8-БИТ.">
+<link rel="stylesheet" href="assets/css/style.css">
+<script>
+(function(){try{if('scrollRestoration' in history){history.scrollRestoration='manual';}window.scrollTo(0,0);}catch(e){}})();
+(function(){document.documentElement.setAttribute('data-theme','light');})();
+</script>
+</head>
+<body>
+<div class="ambient-blobs" aria-hidden="true"><span class="blob blob-1"></span><span class="blob blob-2"></span><span class="blob blob-3"></span></div>
+
+<header class="site-header">
+  <a class="brand" href="index.html">
+    <span class="brand-mark brand-mark-tint" aria-hidden="true"></span>
+    <span>8-БИТ</span>
+  </a>
+  <div class="header-tools">
+    <button class="icon-btn" data-open-modal=".search-modal" aria-label="Поиск">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+    </button>
+    <button class="icon-btn" data-open-modal=".login-modal" aria-label="Личный кабинет">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-4 3-6 7-6s6.2 2 7 6"/></svg>
+    </button>
+    <button class="burger" aria-label="Открыть меню" aria-expanded="false">
+      <span class="burger-box"><i></i><i></i><i></i></span>
+      <span class="burger-label">Меню</span>
+    </button>
+  </div>
+</header>
+
+<div class="menu-overlay" aria-hidden="true">
+  <div class="menu-overlay-scroll">
+  <div class="menu-top">
+    <span>Навигация · 8‑БИТ</span>
+    <button class="menu-close">Закрыть <b>×</b></button>
+  </div>
+  <div class="menu-body">
+    <nav class="menu-links">
+      <a href="about.html">О компании</a>
+      <a href="products.html">Продукты</a>
+      <a href="equipment.html">Торговое оборудование</a>
+      <a href="support.html">Техническая поддержка</a>
+      <a href="news.html">Новости и видео</a>
+      <a href="projects.html">Наши проекты</a>
+      <a href="knowledge.html">База знаний</a>
+      <a href="download.html">Скачать</a>
+    </nav>
+    <aside class="menu-contact">
+      <p>Поможем подобрать решение</p>
+      <a href="tel:+74997000074">+7 (499) 700‑00‑74</a>
+      <span>Мытищи, ул. Институтская, 6</span>
+      <div class="menu-social"><span>Telegram</span><span>MAX</span></div>
+    </aside>
+  </div>
+  </div>
+</div>
+
+<div class="modal search-modal" aria-hidden="true">
+  <div class="modal-card">
+    <button class="modal-close" aria-label="Закрыть">×</button>
+    <span class="modal-tag">Поиск по сайту</span>
+    <form class="search-form" onsubmit="return false">
+      <input type="search" placeholder="Что вы ищете?">
+      <button type="submit">Найти →</button>
+    </form>
+    <div class="quick-links">
+      <span>Часто ищут:</span>
+      <a href="products.html">Кассовая программа</a>
+      <a href="index.html#support">Техподдержка</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal login-modal" aria-hidden="true">
+  <div class="modal-card">
+    <button class="modal-close" aria-label="Закрыть">×</button>
+    <span class="modal-tag">Личный кабинет</span>
+    <h2>Вход для клиентов</h2>
+    <label class="field">Логин<input type="text" placeholder="Ваш логин"></label>
+    <label class="field">Пароль<input type="password" placeholder="••••••••"></label>
+    <button class="btn btn-primary">Войти</button>
+    <p class="modal-foot">Нет доступа? <a href="index.html#contact">Напишите нам</a></p>
+  </div>
+</div>
+
+<div id="smooth-wrapper">
+<div id="smooth-content">
+
+<main><section class="case-hero product-hero" style="padding-bottom:40px">
+  <div class="container">
+    <div class="hero-stage-scene">
+      <div class="case-hero-copy">
+        <a class="back reveal" href="products.html">← Все продукты</a>
+        <span class="eyebrow reveal">Мобильная касса на Android · 03</span>
+        <h1 class="reveal">Айлекс.некст</h1>
+        <p class="lead reveal">Касса в телефоне или на Android-терминале. Нажмите на товар ниже — интерфейс такой же простой, как в приложении на смартфоне.</p>
+      </div>
+      <div class="reveal" style="margin-top:32px;display:flex;justify-content:center">
+        <div class="phone-mock">
+          <div class="phone-status">
+            <span>9:41</span>
+            <div class="phone-status-icons">
+              <div class="phone-signal"><i></i><i></i><i></i><i></i></div>
+              <div class="phone-battery"><i></i></div>
+            </div>
+          </div>
+          <div class="phone-screen" id="phone-screen">Айлекс.некст · Нажмите на товар</div>
+          <div class="phone-tiles" id="phone-tiles">
+            <div style="--d:0" data-price="129" data-name="Напитки">Напитки<b>129 ₽</b></div>
+            <div style="--d:1" data-price="89" data-name="Выпечка">Выпечка<b>89 ₽</b></div>
+            <div style="--d:2" data-price="215" data-name="Бакалея">Бакалея<b>215 ₽</b></div>
+            <div style="--d:3" data-price="0" data-name="Акции">Акции<b>−10%</b></div>
+          </div>
+          <div class="phone-total"><span id="phone-count">В чеке 0 товаров</span><strong id="phone-sum">0 ₽</strong></div>
+          <div class="phone-nav"><span class="active"></span><span></span><span></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container case-block" style="border-top:none">
+  <div class="reveal case-body-text" style="max-width:820px">
+    <span class="eyebrow" style="display:block;margin-bottom:14px">О программе</span>
+    <p><b>«Айлекс.некст»</b> — решение для розничных торговых точек любой направленности, а также для сферы услуг и общепита. Интерфейс максимально прост и понятен для любого пользователя, умеющего работать со смартфоном.</p>
+    <p>Работает на мобильных устройствах с Android, а также на Android-кассах POScenter-BANK-Ф, MSPOS-T-Ф, MSPOS-SE-Ф, MSPOS-E-РФ, MSPOS-D-Ф, MSPOS-K и MSPOS-E-Ф, Нева-01-Ф, ШТРИХ СМАРТПОС Ф МИНИ и ШТРИХ СМАРТПОС Ф.</p>
+  </div>
+
+  <h2 class="reveal" style="margin-top:48px">Кому подходит</h2>
+  <div class="check-list reveal" style="margin-top:16px">
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>Небольшим точкам без места под стационарную кассу</div>
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>Точкам с разливными напитками и общепиту навынос</div>
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>Ярмаркам и выездной торговле — запуск за один день</div>
+  </div>
+
+  <h2 class="reveal" style="margin-top:48px">Функционал</h2>
+  <div class="result-grid reveal-stagger reveal" style="margin-top:16px">
+    <div class="result-card" style="--i:0"><b>01</b><p>Продажа маркированного товара и соответствие ЕГАИС</p></div>
+    <div class="result-card" style="--i:1"><b>02</b><p>Оплата через СБП и любые безналичные способы</p></div>
+    <div class="result-card" style="--i:2"><b>03</b><p>Работа с разливным пивом и другими напитками на розлив</p></div>
+    <div class="result-card" style="--i:3"><b>04</b><p>Ручные и автоматические скидки и надбавки</p></div>
+    <div class="result-card" style="--i:4"><b>05</b><p>Интеграция с облачным бэк-офисом «Айлекс.клауд»</p></div>
+    <div class="result-card" style="--i:5"><b>06</b><p>Подключение внешней учётной программы</p></div>
+  </div>
+
+  <h2 class="reveal" style="margin-top:48px">Цены</h2>
+  <div class="price-table-wrap reveal">
+    <table class="price-table">
+      <thead><tr><th>Название</th><th>Цена, ₽</th></tr></thead>
+      <tbody>
+        <tr><td>Айлекс.некст (лицензия на 365 дней)</td><td>5 000 ₽</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="price-summary reveal"><b>5 000 ₽</b><span>лицензия на 365 дней</span></div>
+  <p class="price-note reveal">Нужен Android-смартфон или совместимый кассовый терминал — подберём модель вместе с лицензией.</p>
+</section>
+</main>
+<script>
+(function(){
+  try{
+    var tiles = document.getElementById('phone-tiles');
+    var screen = document.getElementById('phone-screen');
+    var countEl = document.getElementById('phone-count');
+    var sumEl = document.getElementById('phone-sum');
+    if(!tiles || !screen || !countEl || !sumEl) return;
+    var count = 0, sum = 0;
+    tiles.querySelectorAll('div').forEach(function(tile){
+      tile.addEventListener('click', function(){
+        var price = parseInt(tile.getAttribute('data-price'), 10) || 0;
+        count += 1;
+        sum += price;
+        tile.classList.add('tapped');
+        setTimeout(function(){ tile.classList.remove('tapped'); }, 220);
+        screen.textContent = 'Айлекс.некст · Добавлено: ' + tile.getAttribute('data-name');
+        countEl.textContent = 'В чеке ' + count + (count === 1 ? ' товар' : count < 5 ? ' товара' : ' товаров');
+        sumEl.textContent = sum + ' ₽';
+      });
+    });
+  }catch(e){}
+})();
+</script>
+<div class="cta-band container case-cta" id="contact">
+  <svg class="deco-hatch" style="left:2%;top:6px" viewBox="0 0 110 90" aria-hidden="true">
+    <line x1="6" y1="84" x2="26" y2="64"/><line x1="14" y1="84" x2="34" y2="64"/><line x1="22" y1="84" x2="42" y2="64"/>
+    <line x1="2" y1="66" x2="22" y2="46"/><line x1="10" y1="66" x2="30" y2="46"/><line x1="18" y1="66" x2="38" y2="46"/><line x1="26" y1="66" x2="46" y2="46"/>
+    <line x1="6" y1="48" x2="26" y2="28"/><line x1="14" y1="48" x2="34" y2="28"/><line x1="22" y1="48" x2="42" y2="28"/><line x1="30" y1="48" x2="50" y2="28"/>
+    <line x1="18" y1="30" x2="38" y2="10"/><line x1="26" y1="30" x2="46" y2="10"/><line x1="34" y1="30" x2="54" y2="10"/>
+  </svg>
+  <svg class="deco-dots" style="right:4%;bottom:10px;width:74px;height:74px" viewBox="0 0 70 70" aria-hidden="true">
+    <circle cx="6" cy="10" r="3"/><circle cx="22" cy="6" r="2"/><circle cx="38" cy="14" r="2.5"/>
+    <circle cx="14" cy="26" r="2"/><circle cx="30" cy="30" r="3"/><circle cx="50" cy="24" r="2"/>
+    <circle cx="8" cy="44" r="2.5"/><circle cx="26" cy="48" r="2"/><circle cx="44" cy="44" r="3"/>
+    <circle cx="60" cy="38" r="2"/><circle cx="18" cy="60" r="2"/><circle cx="38" cy="62" r="2.5"/>
+  </svg>
+  <div class="deco-sticker chevron" style="right:8%;top:16px" aria-hidden="true"><i></i><i></i><i></i></div>
+  <span class="eyebrow">Ваш проект следующий</span>
+  <h2>Подберём решение<br>под ваш магазин.</h2>
+  <a class="btn btn-panel" href="tel:+74997000074">Связаться с нами <b>→</b></a>
+</div>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a class="brand" href="index.html">
+        <span class="brand-mark brand-mark-tint" aria-hidden="true"></span>
+        <span>8-БИТ</span>
+      </a>
+      <p>Автоматизация торговли под ключ: кассы, учёт, оборудование и поддержка.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Разделы</h4>
+      <a href="products.html">Продукты</a>
+      <a href="equipment.html">Торговое оборудование</a>
+      <a href="projects.html">Наши проекты</a>
+      <a href="support.html">Техническая поддержка</a>
+    </div>
+    <div class="footer-col">
+      <h4>Контакты</h4>
+      <p>ВЦ 8‑БИТ · Мытищи</p>
+      <a href="tel:+74997000074">+7 (499) 700‑00‑74</a>
+      <a href="#">Мытищи, ул. Институтская, 6</a>
+      <div class="footer-social"><span>Telegram</span><span>Instagram</span><span>MAX</span></div>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 8‑БИТ, 2026</span>
+    <a href="#top">Наверх ↑</a>
+  </div>
+</footer>
+
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollSmoother.min.js"></script>
+<script>
+(function(){
+  try{
+    if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+    document.documentElement.style.scrollBehavior = 'auto';
+    ScrollSmoother.create({ smooth: 0.8, smoothTouch: false });
+  }catch(e){}
+})();
+</script>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

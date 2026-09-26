@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>8-БИТ — всё для работы магазина</title>
+<meta name="description" content="8-БИТ — кассы, программы, оборудование и поддержка для торговли под ключ. Внедряем и сопровождаем автоматизацию магазинов.">
+<link rel="stylesheet" href="assets/css/style.css">
+<script>
+(function(){try{if('scrollRestoration' in history){history.scrollRestoration='manual';}window.scrollTo(0,0);}catch(e){}})();
+(function(){document.documentElement.setAttribute('data-theme','light');})();
+</script>
+</head>
+<body class="dark-hero">
+<div class="ambient-blobs" aria-hidden="true"><span class="blob blob-1"></span><span class="blob blob-2"></span><span class="blob blob-3"></span></div>
+
+<header class="site-header">
+  <a class="brand" href="#top">
+    <span class="brand-mark brand-mark-tint" aria-hidden="true"></span>
+    <span>8-БИТ</span>
+  </a>
+  <div class="header-tools">
+    <button class="icon-btn" data-open-modal=".search-modal" aria-label="Поиск">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+    </button>
+    <button class="icon-btn" data-open-modal=".login-modal" aria-label="Личный кабинет">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-4 3-6 7-6s6.2 2 7 6"/></svg>
+    </button>
+    <button class="burger" aria-label="Открыть меню" aria-expanded="false">
+      <span class="burger-box"><i></i><i></i><i></i></span>
+      <span class="burger-label">Меню</span>
+    </button>
+  </div>
+</header>
+
+<div class="menu-overlay" aria-hidden="true">
+  <div class="menu-overlay-scroll">
+  <div class="menu-top">
+    <span>Навигация · 8‑БИТ</span>
+    <button class="menu-close">Закрыть <b>×</b></button>
+  </div>
+  <div class="menu-body">
+    <nav class="menu-links">
+      <a href="about.html">О компании</a>
+      <a href="products.html">Продукты</a>
+      <a href="equipment.html">Торговое оборудование</a>
+      <a href="support.html">Техническая поддержка</a>
+      <a href="news.html">Новости и видео</a>
+      <a href="projects.html">Наши проекты</a>
+      <a href="knowledge.html">База знаний</a>
+      <a href="download.html">Скачать</a>
+    </nav>
+    <aside class="menu-contact">
+      <p>Поможем подобрать решение</p>
+      <a href="tel:+74997000074">+7 (499) 700‑00‑74</a>
+      <span>Мытищи, ул. Институтская, 6</span>
+      <div class="menu-social"><span>Telegram</span><span>MAX</span></div>
+    </aside>
+  </div>
+  </div>
+</div>
+
+<div class="modal search-modal" aria-hidden="true">
+  <div class="modal-card">
+    <button class="modal-close" aria-label="Закрыть">×</button>
+    <span class="modal-tag">Поиск по сайту</span>
+    <form class="search-form" onsubmit="return false">
+      <input type="search" placeholder="Что вы ищете?">
+      <button type="submit">Найти →</button>
+    </form>
+    <div class="quick-links">
+      <span>Часто ищут:</span>
+      <a href="products.html">Кассовая программа</a>
+      <a href="support.html">Техподдержка</a>
+      <a href="equipment.html">Маркировка</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal login-modal" aria-hidden="true">
+  <div class="modal-card">
+    <button class="modal-close" aria-label="Закрыть">×</button>
+    <span class="modal-tag">Личный кабинет</span>
+    <h2>Вход для клиентов</h2>
+    <label class="field">Логин<input type="text" placeholder="Ваш логин"></label>
+    <label class="field">Пароль<input type="password" placeholder="••••••••"></label>
+    <button class="btn btn-primary">Войти</button>
+    <p class="modal-foot">Нет доступа? <a href="#contact">Напишите нам</a></p>
+  </div>
+</div>
+
+<div id="smooth-wrapper">
+<div id="smooth-content">
+
+<main>
+
+<section class="screen hero" id="top">
+  <div class="code-type" aria-hidden="true">
+    <div class="col"><pre><span class="ln"><span class="kw">const</span> store = <span class="fn">createStore</span>({</span><span class="ln">  modules: {</span><span class="ln">    products,</span><span class="ln">    orders,</span><span class="ln">    customers,</span><span class="ln">    analytics,</span><span class="ln">  },</span><span class="ln">})</span><span class="ln"><span class="kw">async function</span> <span class="fn">syncInventory</span>() {</span><span class="ln">  <span class="kw">const</span> updated = <span class="kw">await</span> api.products.getAll()</span><span class="ln">  <span class="kw">await</span> store.dispatch(<span class="st">'inventory/update'</span>)</span><span class="ln">  logger.info(<span class="st">'synced'</span>, updated.length)</span><span class="ln">  <span class="kw">return</span> updated.length</span><span class="ln">}</span><span class="ln"><span class="kw">store</span>.subscribe(() =&gt; {</span><span class="ln">  persist(store.getState())</span><span class="ln">})</span></pre></div>
+    <div class="col"><pre><span class="ln"><span class="kw">function</span> <span class="fn">getProductById</span>(id) {</span><span class="ln">  <span class="kw">return</span> products.find(p =&gt; p.id === id)</span><span class="ln">}</span><span class="ln"><span class="kw">const</span> discounts = cart.items</span><span class="ln">  .filter(item =&gt; item.promo)</span><span class="ln">  .reduce((sum, i) =&gt; sum + i.discount, <span class="ty">0</span>)</span><span class="ln"><span class="kw">export const</span> productSchema = z.object({</span><span class="ln">  id: z.string(),</span><span class="ln">  name: z.string().min(<span class="ty">1</span>),</span><span class="ln">  price: z.number().positive(),</span><span class="ln">  sku: z.string().optional(),</span><span class="ln">})</span><span class="ln"><span class="kw">function</span> <span class="fn">applyPromo</span>(cart, code) {</span><span class="ln">  <span class="kw">const</span> promo = promos.get(code)</span><span class="ln">  <span class="kw">return</span> promo ? promo.apply(cart) : cart</span><span class="ln">}</span></pre></div>
+    <div class="col"><pre><span class="ln"><span class="kw">import</span> { calculateTotal } <span class="kw">from</span> <span class="st">'@/core/checkout'</span></span><span class="ln"><span class="kw">import</span> { getUserSession } <span class="kw">from</span> <span class="st">'@/lib/session'</span></span><span class="ln"><span class="kw">const</span> session = <span class="kw">await</span> <span class="fn">getUserSession</span>()</span><span class="ln"><span class="kw">const</span> cart = <span class="kw">await</span> store.cart.getItems()</span><span class="ln"><span class="kw">const</span> total = <span class="fn">calculateTotal</span>(cart)</span><span class="ln"><span class="kw">if</span> (cart.items.length === <span class="ty">0</span>) {</span><span class="ln">  <span class="kw">return</span> res.redirect(<span class="st">'/cart'</span>)</span><span class="ln">}</span><span class="ln"><span class="kw">return</span> { ...session, total }</span><span class="ln"><span class="kw">function</span> <span class="fn">formatPrice</span>(v) {</span><span class="ln">  <span class="kw">return</span> `${v.toFixed(<span class="ty">2</span>)} ₽`</span><span class="ln">}</span></pre></div>
+    <div class="col"><pre><span class="ln"><span class="kw">export async function</span> <span class="fn">createOrder</span>(data) {</span><span class="ln">  <span class="kw">try</span> {</span><span class="ln">    <span class="kw">const</span> order = <span class="kw">await</span> db.orders.create({</span><span class="ln">      ...data,</span><span class="ln">      status: <span class="st">'pending'</span>,</span><span class="ln">      createdAt: <span class="kw">new</span> Date(),</span><span class="ln">    })</span><span class="ln">    <span class="kw">await</span> queue.publish(<span class="st">'order.created'</span>, order.id)</span><span class="ln">    <span class="kw">return</span> order</span><span class="ln">  } <span class="kw">catch</span> (error) {</span><span class="ln">    logger.error(<span class="st">'create failed'</span>, error)</span><span class="ln">    <span class="kw">throw</span> error</span><span class="ln">  }</span><span class="ln">}</span></pre></div>
+    <div class="col"><pre><span class="ln">app.get(<span class="st">'/api/products'</span>, <span class="kw">async</span> (req, res) =&gt; {</span><span class="ln">  <span class="kw">const</span> { category, page = <span class="ty">1</span> } = req.query</span><span class="ln">  <span class="kw">const</span> data = <span class="kw">await</span> productService.list({</span><span class="ln">    category,</span><span class="ln">    page: Number(page),</span><span class="ln">    limit: <span class="ty">24</span>,</span><span class="ln">  })</span><span class="ln">  res.json(data)</span><span class="ln">})</span><span class="ln">app.post(<span class="st">'/api/orders'</span>, requireAuth, <span class="kw">async</span> (req, res) =&gt; {</span><span class="ln">  <span class="kw">const</span> order = <span class="kw">await</span> <span class="fn">createOrder</span>(req.body)</span><span class="ln">  res.status(<span class="ty">201</span>).json(order)</span><span class="ln">})</span></pre></div>
+    <div class="col"><pre><span class="ln"><span class="kw">function</span> <span class="fn">printReceipt</span>(order) {</span><span class="ln">  <span class="kw">const</span> lines = order.items.map(i =&gt;</span><span class="ln">    <span class="st">`${i.name} x${i.qty}`</span></span><span class="ln">  )</span><span class="ln">  lines.push(<span class="st">`Итого: ${order.total}`</span>)</span><span class="ln">  <span class="kw">return</span> printer.send(lines)</span><span class="ln">}</span><span class="ln"><span class="kw">async function</span> <span class="fn">voidReceipt</span>(id) {</span><span class="ln">  <span class="kw">await</span> db.receipts.update(id, {</span><span class="ln">    status: <span class="st">'voided'</span>,</span><span class="ln">    voidedAt: <span class="kw">new</span> Date(),</span><span class="ln">  })</span><span class="ln">}</span><span class="ln">printer.on(<span class="st">'offline'</span>, notifyStaff)</span></pre></div>
+    <div class="col"><pre><span class="ln"><span class="kw">async function</span> <span class="fn">chargeCard</span>(amount) {</span><span class="ln">  <span class="kw">const</span> result = <span class="kw">await</span> terminal.charge({</span><span class="ln">    amount,</span><span class="ln">    currency: <span class="st">'RUB'</span>,</span><span class="ln">  })</span><span class="ln">  <span class="kw">if</span> (!result.approved) {</span><span class="ln">    <span class="kw">throw new</span> PaymentError(<span class="st">'declined'</span>)</span><span class="ln">  }</span><span class="ln">  <span class="kw">await</span> db.payments.create(result)</span><span class="ln">  <span class="kw">return</span> result.id</span><span class="ln">}</span><span class="ln"><span class="kw">function</span> <span class="fn">refund</span>(paymentId) {</span><span class="ln">  <span class="kw">return</span> terminal.refund(paymentId)</span><span class="ln">}</span></pre></div>
+    <div class="col"><pre><span class="ln"><span class="kw">export function</span> <span class="fn">requireAuth</span>(req, res, next) {</span><span class="ln">  <span class="kw">const</span> token = req.headers.authorization</span><span class="ln">  <span class="kw">if</span> (!token) {</span><span class="ln">    <span class="kw">return</span> res.status(<span class="ty">401</span>).end()</span><span class="ln">  }</span><span class="ln">  req.user = verifyToken(token)</span><span class="ln">  next()</span><span class="ln">}</span><span class="ln"><span class="kw">function</span> <span class="fn">hashPassword</span>(pw) {</span><span class="ln">  <span class="kw">return</span> bcrypt.hash(pw, <span class="ty">10</span>)</span><span class="ln">}</span><span class="ln">session.on(<span class="st">'expire'</span>, () =&gt; logout())</span></pre></div>
+    <div class="col"><pre><span class="ln"><span class="kw">async function</span> <span class="fn">dailyReport</span>(date) {</span><span class="ln">  <span class="kw">const</span> sales = <span class="kw">await</span> db.query(</span><span class="ln">    <span class="st">'select sum(total) as revenue'</span></span><span class="ln">  )</span><span class="ln">  <span class="kw">return</span> sales.rows[<span class="ty">0</span>]</span><span class="ln">}</span><span class="ln"><span class="kw">async function</span> <span class="fn">exportCsv</span>(rows) {</span><span class="ln">  <span class="kw">const</span> csv = toCsv(rows)</span><span class="ln">  <span class="kw">await</span> storage.upload(<span class="st">'report.csv'</span>, csv)</span><span class="ln">  <span class="kw">return</span> storage.url(<span class="st">'report.csv'</span>)</span><span class="ln">}</span></pre></div>
+    <div class="col"><pre><span class="ln"><span class="kw">async function</span> <span class="fn">notifyLowStock</span>(item) {</span><span class="ln">  <span class="kw">if</span> (item.quantity &lt; item.threshold) {</span><span class="ln">    <span class="kw">await</span> push.send({</span><span class="ln">      title: <span class="st">'Low stock'</span>,</span><span class="ln">      body: item.name,</span><span class="ln">    })</span><span class="ln">  }</span><span class="ln">}</span><span class="ln">webhook.on(<span class="st">'order.paid'</span>, <span class="kw">async</span> e =&gt; {</span><span class="ln">  <span class="kw">await</span> mailer.send(e.email)</span><span class="ln">  <span class="kw">await</span> sms.send(e.phone)</span><span class="ln">})</span></pre></div>
+  </div>
+  <div class="container">
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <h1 class="headline">
+        <span class="word"><span>Всё</span></span> <span class="word"><span>для</span></span> <span class="word"><span>работы</span></span><br>
+        <span class="word"><span>магазина</span></span>
+      </h1>
+      <div class="hero-actions">
+        <a class="btn btn-panel" href="products.html">Подобрать решение <b>→</b></a>
+      </div>
+    </div>
+  </div>
+  </div>
+  <button type="button" class="scroll-cue" id="scroll-cue" aria-label="Прокрутить к следующему блоку">
+    <span class="scroll-cue-ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+    <span>Листайте</span>
+  </button>
+</section>
+
+<section class="screen products" id="products">
+  <div class="side-deco deco-ring left" aria-hidden="true"></div>
+  <div class="deco-sticker plus" style="right:6%;top:10%;transform:rotate(14deg)" aria-hidden="true"><i></i><i></i></div>
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Продукты</span>
+      <h2>Одна система.<br>Любой формат торговли.</h2>
+      <p>От кассы у входа до управленческого отчёта — программы 8‑БИТ работают вместе и понимают друг друга.</p>
+      <a class="open-link" href="products.html" style="margin-top:16px">Все продукты <b>→</b></a>
+    </div>
+
+    <div class="product-showcase reveal">
+      <div class="product-item is-open" data-index="0">
+        <button class="item-tab" type="button" aria-label="Открыть Кассир 5">
+          <span class="tab-num">01 →</span>
+          <span class="tab-name">Кассир 5</span>
+        </button>
+        <div class="item-open">
+          <div class="open-info">
+            <span class="open-num">01</span>
+            <span class="open-cat">Кассовая программа</span>
+            <h3 class="open-name">Кассир 5</h3>
+            <p class="open-desc">Продажи, возвраты, скидки и маркировка — в понятном интерфейсе для кассира.</p>
+            <a class="open-link" href="product-kassir5.html">Узнать больше <b>→</b></a>
+          </div>
+          <div class="open-visual mock-pos">
+            <div class="pos-head"><span>Кассир 5</span><span>Смена открыта</span></div>
+            <div class="pos-sum"><span>Итого</span><strong>437 ₽</strong></div>
+            <div class="pos-grid">
+              <span class="pos-btn">Сэндвич курица<span>219 ₽</span></span>
+              <span class="pos-btn">Сок апельсиновый<span>129 ₽</span></span>
+              <span class="pos-btn">Молоко<span>89 ₽</span></span>
+              <span class="pos-btn">Хлеб бородинский<span>68 ₽</span></span>
+            </div>
+            <span class="pos-pay">Оплата</span>
+          </div>
+        </div>
+      </div>
+      <div class="product-item" data-index="1">
+        <button class="item-tab" type="button" aria-label="Открыть айлекс.некст">
+          <span class="tab-num">02 →</span>
+          <span class="tab-name">айлекс.некст</span>
+        </button>
+        <div class="item-open">
+          <div class="open-info">
+            <span class="open-num">02</span>
+            <span class="open-cat">Мобильная касса</span>
+            <h3 class="open-name">айлекс.некст</h3>
+            <p class="open-desc">Касса на Android для небольших точек — запускается за один день, без лишнего оборудования.</p>
+            <a class="open-link" href="product-ilexx-next.html">Узнать больше <b>→</b></a>
+          </div>
+          <div class="open-visual mock-android">
+            <div class="m-status"><span>9:41</span><span>айлекс.некст</span><span>Wi‑Fi</span></div>
+            <div class="m-app">Выбор категории</div>
+            <div class="m-tiles">
+              <div><b>128</b>Напитки</div>
+              <div><b>64</b>Выпечка</div>
+              <div><b>212</b>Бакалея</div>
+              <div><b>19</b>Акции</div>
+            </div>
+            <div class="m-nav"><span class="active"></span><span></span><span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="product-item" data-index="2">
+        <button class="item-tab" type="button" aria-label="Открыть Торговое предприятие 7">
+          <span class="tab-num">03 →</span>
+          <span class="tab-name">Торговое предприятие 7</span>
+        </button>
+        <div class="item-open">
+          <div class="open-info">
+            <span class="open-num">03</span>
+            <span class="open-cat">Товароучёт</span>
+            <h3 class="open-name">Торговое предприятие 7</h3>
+            <p class="open-desc">Остатки, закупки и движение товаров в реальном времени — для магазина или сети.</p>
+            <a class="open-link" href="product-torgovoe-predpriyatie-7.html">Узнать больше <b>→</b></a>
+          </div>
+          <div class="open-visual mock-dash">
+            <div class="m-chart"><i style="height:38%"></i><i style="height:64%"></i><i style="height:48%"></i><i style="height:82%"></i><i style="height:58%"></i><i style="height:70%"></i></div>
+            <table>
+              <tr><td>Молоко 1 л</td><td class="up">▲ 128</td></tr>
+              <tr><td>Хлеб бородинский</td><td class="down">▼ 12</td></tr>
+              <tr><td>Кофе в зёрнах</td><td class="up">▲ 46</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="product-item" data-index="3">
+        <button class="item-tab" type="button" aria-label="Открыть айлекс.селфчекаут">
+          <span class="tab-num">04 →</span>
+          <span class="tab-name">айлекс.селфчекаут</span>
+        </button>
+        <div class="item-open">
+          <div class="open-info">
+            <span class="open-num">04</span>
+            <span class="open-cat">Самообслуживание</span>
+            <h3 class="open-name">айлекс.селфчекаут</h3>
+            <p class="open-desc">Самостоятельная оплата для покупателей — меньше очередей в часы пик.</p>
+            <a class="open-link" href="product-ilexx-selfcheckout.html">Узнать больше <b>→</b></a>
+          </div>
+          <div class="open-visual mock-kiosk">
+            <div class="m-head"><span>айлекс.селфчекаут · Касса 3</span><span class="live"><i></i>Онлайн</span></div>
+            <div class="m-scan">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7V4h3M20 7V4h-3M4 17v3h3M20 17v3h-3"/><path d="M7 9v6M11 9v6M14 9v6M17 9v6"/></svg>
+              <span class="beam"></span>
+              <p>Отсканируйте товар</p>
+            </div>
+            <ul class="m-items">
+              <li><span class="sq"></span><span>Сок апельсиновый</span><b>129 ₽</b></li>
+              <li><span class="sq"></span><span>Хлеб бородинский</span><b>68 ₽</b></li>
+            </ul>
+            <div class="m-total"><span style="font-size:12px;color:var(--muted)">Итого</span><strong>197 ₽</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="trust-strip">
+  <div class="container">
+    <span class="trust-label">Автоматизируем</span>
+    <div class="marquee-wrap page-marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Продуктовые магазины</span><span>Кафе и рестораны</span><span>Магазины одежды</span><span>Аптеки</span><span>Пекарни</span><span>Небольшие сети</span><span>Точки доставки</span><span>Магазины у дома</span>
+        <span>Продуктовые магазины</span><span>Кафе и рестораны</span><span>Магазины одежды</span><span>Аптеки</span><span>Пекарни</span><span>Небольшие сети</span><span>Точки доставки</span><span>Магазины у дома</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="screen solutions" id="solutions">
+  <div class="side-deco deco-blob right" aria-hidden="true"></div>
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Торговое оборудование</span>
+      <h2>Автоматизация под задачи<br>вашего бизнеса.</h2>
+      <p>8‑БИТ не просто продаёт программы — мы собираем рабочую систему под конкретный формат торговли.</p>
+      <a class="open-link" href="equipment.html" style="margin-top:16px">Каталог оборудования <b>→</b></a>
+    </div>
+
+    <div class="solution-grid reveal-stagger reveal">
+      <article class="solution-card" style="--i:0">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 8h12l-1.2 10.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg></span>
+        <h3>Продуктовый магазин</h3>
+        <p>Касса с маркировкой, быстрый ввод веса и штрихкода, контроль остатков на полке.</p>
+        <div class="stack"><span>Кассир 5</span><span>ТП 7</span></div>
+      </article>
+      <article class="solution-card" style="--i:1">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 4h6l1 3-4 2-4-2 1-3Z"/><path d="M9 7 4 10v10h16V10l-5-3"/></svg></span>
+        <h3>Одежда и маркировка</h3>
+        <p>Честный знак без остановки продаж, приёмка партий, учёт по размерам и цвету.</p>
+        <div class="stack"><span>ТП 7</span><span>Маркировка</span></div>
+      </article>
+      <article class="solution-card" style="--i:2">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 9h11v6a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V9Z"/><path d="M16 11h1.5a2.5 2.5 0 0 1 0 5H16"/><path d="M8 4v2M11 4v2"/></svg></span>
+        <h3>Кафе и доставка</h3>
+        <p>Заказы с агрегаторов сразу на кассу, технологические карты и списание сырья.</p>
+        <div class="stack"><span>Кассир 5</span><span>ТП 7</span></div>
+      </article>
+      <article class="solution-card" style="--i:3">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 21V9l8-5 8 5v12"/><path d="M9 21v-6h6v6"/></svg></span>
+        <h3>Небольшая сеть</h3>
+        <p>Единый учёт по точкам, сверка продаж и остатков, отчёты для руководителя.</p>
+        <div class="stack"><span>ТП 7</span><span>Аналитика</span></div>
+      </article>
+      <div class="deco-sticker mark" style="right:-24px;top:-28px;transform:rotate(-8deg)" aria-hidden="true">
+        <i class="on"></i><i></i><i class="on"></i><i class="on"></i>
+        <i></i><i class="on"></i><i></i><i class="on"></i>
+        <i class="on"></i><i class="on"></i><i></i><i></i>
+        <i></i><i></i><i class="on"></i><i class="on"></i>
+      </div>
+      <svg class="deco-hatch" style="left:-14px;bottom:-14px" viewBox="0 0 110 90" aria-hidden="true">
+        <line x1="6" y1="84" x2="26" y2="64"/><line x1="14" y1="84" x2="34" y2="64"/><line x1="22" y1="84" x2="42" y2="64"/>
+        <line x1="2" y1="66" x2="22" y2="46"/><line x1="10" y1="66" x2="30" y2="46"/><line x1="18" y1="66" x2="38" y2="46"/><line x1="26" y1="66" x2="46" y2="46"/>
+        <line x1="6" y1="48" x2="26" y2="28"/><line x1="14" y1="48" x2="34" y2="28"/><line x1="22" y1="48" x2="42" y2="28"/><line x1="30" y1="48" x2="50" y2="28"/>
+        <line x1="18" y1="30" x2="38" y2="10"/><line x1="26" y1="30" x2="46" y2="10"/><line x1="34" y1="30" x2="54" y2="10"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="screen process" id="process">
+  <div class="side-deco deco-ring left" aria-hidden="true"></div>
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">База знаний</span>
+      <h2>От аудита до запуска —<br>без лишних шагов.</h2>
+    </div>
+
+    <div class="process-grid reveal-stagger reveal">
+      <div class="deco-sticker medal" style="left:-26px;top:-24px" aria-hidden="true"></div>
+      <div class="step step-1" style="--i:0">
+        <span class="num">01 — Аудит</span>
+        <h3>Смотрим, как устроен магазин сейчас</h3>
+        <p>Изучаем процессы, оборудование и точки, где теряется время и деньги.</p>
+        <div class="step-frag frag-list">
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>Кассовая зона и трафик</div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>Текущий товарный учёт</div>
+          <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg>Требования маркировки</div>
+        </div>
+      </div>
+      <div class="step step-2" style="--i:1">
+        <span class="num">02 — Подбор решения</span>
+        <h3>Собираем комплект программ и оборудования</h3>
+        <div class="step-frag frag-compare">
+          <span>Базовый</span><span class="sel">Оптимальный</span><span>Расширенный</span>
+        </div>
+      </div>
+      <div class="step step-3" style="--i:2">
+        <span class="num">03 — Внедрение</span>
+        <h3>Настраиваем и запускаем систему на месте</h3>
+        <p>Устанавливаем оборудование, переносим справочники, тестируем на реальных продажах.</p>
+        <div class="step-frag">
+          <div class="frag-bar"><i></i></div>
+          <span class="frag-note">Готовность запуска · 78%</span>
+        </div>
+      </div>
+      <div class="step step-4" style="--i:3">
+        <span class="num">04 — Обучение и поддержка</span>
+        <h3>Обучаем сотрудников и остаёмся на связи</h3>
+        <div class="step-frag frag-chat">
+          <span class="avatar"></span>
+          <span>«Спасибо, разобрались с возвратом за 2 минуты» — кассир, магазин «Кимфьюжен»</span>
+        </div>
+      </div>
+      <svg class="deco-dots" style="right:-8px;top:-10px;width:74px;height:74px" viewBox="0 0 70 70" aria-hidden="true">
+        <circle cx="6" cy="10" r="3"/><circle cx="22" cy="6" r="2"/><circle cx="38" cy="14" r="2.5"/>
+        <circle cx="14" cy="26" r="2"/><circle cx="30" cy="30" r="3"/><circle cx="50" cy="24" r="2"/>
+        <circle cx="8" cy="44" r="2.5"/><circle cx="26" cy="48" r="2"/><circle cx="44" cy="44" r="3"/>
+        <circle cx="60" cy="38" r="2"/><circle cx="18" cy="60" r="2"/><circle cx="38" cy="62" r="2.5"/>
+      </svg>
+    </div>
+
+    <div class="flow-line reveal" aria-hidden="true">
+      <div class="flow-checkpoints"><span></span><span></span><span></span><span></span></div>
+      <i class="flow-pulse"></i>
+    </div>
+  </div>
+</section>
+
+<section class="screen support" id="support">
+  <div class="side-deco deco-blob left" aria-hidden="true"></div>
+  <div class="container">
+  <div class="support-grid">
+    <div class="support-copy reveal">
+      <span class="eyebrow">Техническая поддержка</span>
+      <h2>Остаёмся рядом<br>после запуска.</h2>
+      <p>Обучаем сотрудников, решаем технические вопросы и сопровождаем вашу систему на постоянной основе.</p>
+      <a class="btn btn-panel" href="#contact">Обсудить поддержку <b>→</b></a>
+    </div>
+    <div class="support-panel reveal">
+      <div class="deco-sticker bracket" style="right:-30px;top:-30px;width:100px;height:56px" aria-hidden="true"><i></i><i></i></div>
+      <div class="support-card">
+        <span class="support-247">24/7</span>
+        <span class="divider"></span>
+        <span class="label"><b><i class="live-dot"></i>Специалисты на связи</b>Удалённо и с выездом инженера</span>
+      </div>
+      <div class="support-row">
+        <div class="support-mini">
+          <div class="avatars"><i></i><i></i><i></i></div>
+          <p>Команда сопровождения знает вашу систему с момента внедрения</p>
+        </div>
+        <div class="support-mini">
+          <p style="margin-top:0">Обращение №4821</p>
+          <div class="chat-bubble">«Приняли в работу, уже разбираемся»</div>
+        </div>
+      </div>
+      <svg class="deco-hatch" style="right:-10px;bottom:-8px" viewBox="0 0 110 90" aria-hidden="true">
+        <line x1="6" y1="84" x2="26" y2="64"/><line x1="14" y1="84" x2="34" y2="64"/><line x1="22" y1="84" x2="42" y2="64"/>
+        <line x1="2" y1="66" x2="22" y2="46"/><line x1="10" y1="66" x2="30" y2="46"/><line x1="18" y1="66" x2="38" y2="46"/><line x1="26" y1="66" x2="46" y2="46"/>
+        <line x1="6" y1="48" x2="26" y2="28"/><line x1="14" y1="48" x2="34" y2="28"/><line x1="22" y1="48" x2="42" y2="28"/><line x1="30" y1="48" x2="50" y2="28"/>
+        <line x1="18" y1="30" x2="38" y2="10"/><line x1="26" y1="30" x2="46" y2="10"/><line x1="34" y1="30" x2="54" y2="10"/>
+      </svg>
+    </div>
+  </div>
+  <div class="barcode-scan reveal" aria-hidden="true">
+    <div class="scan-glow"></div>
+    <div class="scan-head"></div>
+    <div class="barcode-bars">
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+    </div>
+  </div>
+  </div>
+</section>
+
+<section class="screen projects" id="projects">
+  <div class="side-deco deco-blob left" aria-hidden="true"></div>
+  <div class="container">
+    <div class="news-head reveal">
+      <div class="section-head">
+        <span class="eyebrow">Наши проекты</span>
+        <h2>Показываем результат,<br>а не обещания.</h2>
+      </div>
+      <a class="btn btn-ghost" href="projects.html">Все проекты →</a>
+    </div>
+
+    <div class="project-grid reveal">
+      <div class="deco-sticker plus" style="right:-20px;top:-22px;transform:rotate(-10deg)" aria-hidden="true"><i></i><i></i></div>
+      <a class="project-card main photo" href="kimfusion.html">
+        <div class="project-photo" aria-hidden="true">
+          <img src="assets/img/kimfusion/01-sign.jpeg" alt="">
+          <div class="stack">
+            <img src="assets/img/kimfusion/05-screen.jpeg" alt="">
+            <img src="assets/img/kimfusion/04-cashdesk.jpeg" alt="">
+          </div>
+        </div>
+        <small>01 · Магазин «Кимфьюжен»</small>
+        <h3>Автоматизация магазина «Кимфьюжен»</h3>
+        <span>Смотреть кейс ↗</span>
+      </a>
+      <a class="project-card photo" href="avokado.html">
+        <div class="project-photo single" aria-hidden="true">
+          <img src="assets/img/avokado/avokado-1.jpg" alt="" style="object-position:top">
+        </div>
+        <small>02 · Кассир 5 · Торговое предприятие 7</small>
+        <h3>Магазин «Авокадо»</h3>
+        <span>Смотреть кейс ↗</span>
+      </a>
+      <a class="project-card photo" href="ring.html">
+        <div class="project-photo single" aria-hidden="true">
+          <img src="assets/img/ring/ring-1.jpeg" alt="">
+        </div>
+        <small>03 · Кассир 5 · Торговое предприятие 7</small>
+        <h3>Магазин «Ринг»</h3>
+        <span>Смотреть кейс ↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="news" id="news">
+  <div class="side-deco deco-ring right" aria-hidden="true"></div>
+  <div class="container">
+    <div class="news-head reveal">
+      <div>
+        <span class="eyebrow">Новости и видео</span>
+        <h2 style="margin-top:14px;font-size:clamp(28px,3.4vw,42px);font-weight:700;letter-spacing:-.02em;font-family:'Unbounded',var(--font-ui)">Важно знать</h2>
+      </div>
+      <a class="btn btn-ghost" href="news.html">Все материалы →</a>
+    </div>
+    <div class="news-list reveal">
+      <div class="deco-sticker squiggle" style="left:-30px;top:-20px" aria-hidden="true">
+        <svg viewBox="0 0 150 24" fill="none"><path d="M0,12 Q9,2 18,12 T36,12 T54,12 T72,12 T90,12 T108,12 T126,12 T144,12" stroke="var(--teal-accent)" stroke-width="3" stroke-linecap="round"/></svg>
+      </div>
+      <a class="news-item" href="news-ileks-next-1-3-155.html">
+        <time>24.09.2026</time><span class="cat">Обновление ПО</span>
+        <h3>Релиз «айлекс.некст» 1.3.155: проверка маркировки в чеке и автоцена на табак</h3><b>→</b>
+      </a>
+      <a class="news-item" href="news-etrn-torgovoe-predpriyatie-7.html">
+        <time>08.09.2026</time><span class="cat">Законодательство</span>
+        <h3>ЭТрН стала обязательной для большинства перевозок с 1 сентября</h3><b>→</b>
+      </a>
+      <a class="news-item" href="news-cifrovoy-rubl.html">
+        <time>07.09.2026</time><span class="cat">Оплата</span>
+        <h3>Цифровой рубль: что нужно знать владельцу магазина</h3><b>→</b>
+      </a>
+      <svg class="deco-dots" style="right:-6px;top:-10px;width:64px;height:64px" viewBox="0 0 70 70" aria-hidden="true">
+        <circle cx="6" cy="10" r="3"/><circle cx="22" cy="6" r="2"/><circle cx="38" cy="14" r="2.5"/>
+        <circle cx="14" cy="26" r="2"/><circle cx="30" cy="30" r="3"/><circle cx="50" cy="24" r="2"/>
+        <circle cx="8" cy="44" r="2.5"/><circle cx="26" cy="48" r="2"/><circle cx="44" cy="44" r="3"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="cta-band container" id="contact">
+  <svg class="deco-hatch" style="left:2%;top:6px" viewBox="0 0 110 90" aria-hidden="true">
+    <line x1="6" y1="84" x2="26" y2="64"/><line x1="14" y1="84" x2="34" y2="64"/><line x1="22" y1="84" x2="42" y2="64"/>
+    <line x1="2" y1="66" x2="22" y2="46"/><line x1="10" y1="66" x2="30" y2="46"/><line x1="18" y1="66" x2="38" y2="46"/><line x1="26" y1="66" x2="46" y2="46"/>
+    <line x1="6" y1="48" x2="26" y2="28"/><line x1="14" y1="48" x2="34" y2="28"/><line x1="22" y1="48" x2="42" y2="28"/><line x1="30" y1="48" x2="50" y2="28"/>
+    <line x1="18" y1="30" x2="38" y2="10"/><line x1="26" y1="30" x2="46" y2="10"/><line x1="34" y1="30" x2="54" y2="10"/>
+  </svg>
+  <svg class="deco-dots" style="right:4%;bottom:10px;width:74px;height:74px" viewBox="0 0 70 70" aria-hidden="true">
+    <circle cx="6" cy="10" r="3"/><circle cx="22" cy="6" r="2"/><circle cx="38" cy="14" r="2.5"/>
+    <circle cx="14" cy="26" r="2"/><circle cx="30" cy="30" r="3"/><circle cx="50" cy="24" r="2"/>
+    <circle cx="8" cy="44" r="2.5"/><circle cx="26" cy="48" r="2"/><circle cx="44" cy="44" r="3"/>
+    <circle cx="60" cy="38" r="2"/><circle cx="18" cy="60" r="2"/><circle cx="38" cy="62" r="2.5"/>
+  </svg>
+  <div class="deco-sticker chevron" style="right:8%;top:16px" aria-hidden="true"><i></i><i></i><i></i></div>
+  <span class="eyebrow">Начать проект</span>
+  <h2>Подберём решение<br>под ваш магазин.</h2>
+  <a class="btn btn-panel" href="tel:+74997000074">Связаться с нами <b>→</b></a>
+</div>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a class="brand" href="#top">
+        <span class="brand-mark brand-mark-tint" aria-hidden="true"></span>
+        <span>8-БИТ</span>
+      </a>
+      <p>Автоматизация торговли под ключ: кассы, учёт, оборудование и поддержка.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Разделы</h4>
+      <a href="products.html">Продукты</a>
+      <a href="equipment.html">Торговое оборудование</a>
+      <a href="projects.html">Наши проекты</a>
+      <a href="support.html">Техническая поддержка</a>
+    </div>
+    <div class="footer-col">
+      <h4>Контакты</h4>
+      <p>ВЦ 8‑БИТ · Мытищи</p>
+      <a href="tel:+74997000074">+7 (499) 700‑00‑74</a>
+      <a href="#">Мытищи, ул. Институтская, 6</a>
+      <div class="footer-social"><span>Telegram</span><span>Instagram</span><span>MAX</span></div>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© 8‑БИТ, 2026</span>
+    <a href="#top">Наверх ↑</a>
+  </div>
+</footer>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollSmoother.min.js"></script>
+<script>
+(function(){
+  try{
+    if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+    document.documentElement.style.scrollBehavior = 'auto';
+    window.__smoother = ScrollSmoother.create({ smooth: 0.5, smoothTouch: false });
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var words = document.querySelectorAll('.headline .word > span');
+    if(words.length){
+      gsap.set(words, { yPercent: 105, opacity: 0 });
+      gsap.to(words, { yPercent: 0, opacity: 1, duration: .9, ease: 'power3.out', stagger: .08, delay: .3 });
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var btn = document.getElementById('scroll-cue');
+    var target = document.getElementById('products');
+    if(!btn || !target) return;
+    btn.addEventListener('click', function(){
+      if(window.__smoother){ window.__smoother.scrollTo(target, true); }
+      else{ target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  }catch(e){}
+})();
+</script>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
