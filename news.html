@@ -98,58 +98,120 @@
     <span class="eyebrow reveal">Новости и видео</span>
     <h1 class="reveal">Важно знать</h1>
     <p class="lead reveal">Обновления кассовых программ, изменения в законодательстве и разборы того, что реально влияет на вашу кассу — коротко и по делу.</p>
+    <div class="news-filters reveal" role="tablist" aria-label="Категории новостей">
+      <button class="news-filter is-active" data-filter="all" role="tab" aria-selected="true">Все</button>
+      <button class="news-filter" data-filter="general" role="tab" aria-selected="false">Общие новости</button>
+      <button class="news-filter" data-filter="update" role="tab" aria-selected="false">Обновления продуктов</button>
+      <button class="news-filter" data-filter="company" role="tab" aria-selected="false">Новости 8-БИТ</button>
+      <button class="news-filter" data-filter="useful" role="tab" aria-selected="false">Полезные материалы</button>
+      <button class="news-filter" data-filter="video" role="tab" aria-selected="false">Видео</button>
+    </div>
   </div>
 </section>
 
 <section class="container case-block" style="padding-top:0">
-  <div class="news-grid reveal-stagger">
-    <div class="deco-sticker squiggle" style="left:-30px;top:-20px" aria-hidden="true">
-      <svg viewBox="0 0 150 24" fill="none"><path d="M0,12 Q9,2 18,12 T36,12 T54,12 T72,12 T90,12 T108,12 T126,12 T144,12" stroke="var(--teal-accent)" stroke-width="3" stroke-linecap="round"/></svg>
-    </div>
-    <a class="news-card" href="news-ileks-next-1-3-155.html">
+  <div class="news-editorial reveal-stagger" id="news-grid">
+    <a class="news-card size-featured news-cat-general" href="news-cifrovoy-rubl.html" data-cat="general">
+      <svg class="cat-motif" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg>
+      <div class="news-card-copy">
+        <time>07.09.2026</time>
+        <span class="cat">Оплата · Общие новости</span>
+        <h3>Цифровой рубль: что нужно знать владельцу магазина</h3>
+        <p>Комиссии, штрафы за отказ принимать оплату и как подключить приём в «Кассир 5», «Торговом предприятии 7» и «айлекс.некст» — главное по новой обязанности одним разбором.</p>
+      </div>
+      <b>Читать →</b>
+    </a>
+
+    <a class="news-card size-medium news-cat-update" href="news-ileks-next-1-3-155.html" data-cat="update">
+      <svg class="cat-motif" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 4v5h-5"/></svg>
       <time>24.09.2026</time>
       <span class="cat">Обновление ПО</span>
       <h3>Релиз «айлекс.некст» 1.3.155: проверка маркировки в чеке и автоцена на табак</h3>
-      <p>Индикация проверки маркировки ТС ПИоТ прямо в чеке и автоподстановка МРЦ для табачной продукции — с видео-разбором обеих функций.</p>
+      <p>Индикация проверки ТС ПИоТ прямо в чеке и автоподстановка МРЦ для табака — с видео-разбором обеих функций.</p>
       <b>Читать →</b>
     </a>
-    <a class="news-card news-cat-law" href="news-etrn-torgovoe-predpriyatie-7.html">
+    <a class="news-card size-medium news-cat-general" href="news-etrn-torgovoe-predpriyatie-7.html" data-cat="general">
+      <svg class="cat-motif" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg>
       <time>08.09.2026</time>
       <span class="cat">Законодательство</span>
       <h3>ЭТрН стала обязательной для большинства перевозок с 1 сентября</h3>
       <p>Как электронная транспортная накладная поддержана в «Торговом предприятии 7» и что делать, если вы перевозите товар.</p>
       <b>Читать →</b>
     </a>
-    <a class="news-card news-cat-pay" href="news-cifrovoy-rubl.html">
-      <time>07.09.2026</time>
-      <span class="cat">Оплата</span>
-      <h3>Цифровой рубль: что нужно знать владельцу магазина</h3>
-      <p>Комиссии, штрафы за отказ принимать оплату и как подключить приём в «Кассир 5», «Торговом предприятии 7» и «айлекс.некст».</p>
-      <b>Читать →</b>
-    </a>
-    <a class="news-card news-cat-cert" href="news-tspiot-sertifikaciya.html">
+
+    <a class="news-card size-compact news-cat-update" href="news-tspiot-sertifikaciya.html" data-cat="update">
+      <svg class="cat-motif" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 4v5h-5"/></svg>
       <time>04.09.2026</time>
       <span class="cat">Сертификация</span>
       <h3>«айлекс.некст» прошёл сертификацию для работы с ТС ПИоТ</h3>
-      <p>Программа вошла в реестр совместимого ПО и доступна в личном кабинете ЕСП для смарт-терминалов POScenter и НЕВА.</p>
+      <p>Вошла в реестр совместимого ПО, доступна в личном кабинете ЕСП для POScenter и НЕВА.</p>
       <b>Читать →</b>
     </a>
-    <a class="news-card" href="news-kassir5-31-relise.html">
+    <a class="news-card size-compact news-cat-update" href="news-kassir5-31-relise.html" data-cat="update">
+      <svg class="cat-motif" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7M21 4v5h-5"/></svg>
       <time>27.08.2026</time>
       <span class="cat">Обновление ПО</span>
       <h3>«Кассир 5»: исправление в 31 релизе</h3>
-      <p>Исправлена ошибка в компоненте работы со Сбербанком и цифровым рублём при работе с несколькими юридическими лицами.</p>
+      <p>Исправлена ошибка в работе со Сбербанком и цифровым рублём при нескольких юрлицах.</p>
       <b>Читать →</b>
     </a>
-    <svg class="deco-dots" style="right:-6px;top:-10px;width:64px;height:64px" viewBox="0 0 70 70" aria-hidden="true">
-      <circle cx="6" cy="10" r="3"/><circle cx="22" cy="6" r="2"/><circle cx="38" cy="14" r="2.5"/>
-      <circle cx="14" cy="26" r="2"/><circle cx="30" cy="30" r="3"/><circle cx="50" cy="24" r="2"/>
-      <circle cx="8" cy="44" r="2.5"/><circle cx="26" cy="48" r="2"/><circle cx="44" cy="44" r="3"/>
-    </svg>
+    <a class="news-card size-compact news-cat-company" href="magazin-zodhiy.html" data-cat="company">
+      <svg class="cat-motif" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 21V9l8-5 8 5v12M9 21v-6h6v6"/></svg>
+      <time>Наш проект</time>
+      <span class="cat">Новости 8-БИТ</span>
+      <h3>Как мы перевели магазин «Зодчий» на новую кассовую систему</h3>
+      <p>Перенесли базу с 1С:Управление торговлей на «Штрих-М: Торговое предприятие 7» и подключили оборудование.</p>
+      <b>Смотреть кейс →</b>
+    </a>
+    <a class="news-card size-compact news-cat-useful" href="knowledge.html" data-cat="useful">
+      <svg class="cat-motif" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 4h11a2 2 0 0 1 2 2v14l-7.5-4L4 20V6a2 2 0 0 1 2-2z"/></svg>
+      <time>База знаний</time>
+      <span class="cat">Полезные материалы</span>
+      <h3>От аудита до запуска — как проходит внедрение</h3>
+      <p>Разбор всего пути: аудит магазина, подбор решения, установка и обучение сотрудников.</p>
+      <b>Читать →</b>
+    </a>
+
+    <a class="news-video-card size-video news-cat-video" href="https://rutube.ru/video/7d23550520ce06f5a7ff155e96940a3a/" target="_blank" rel="noopener" data-cat="video">
+      <div class="news-video-thumb">
+        <span class="brand-mark brand-mark-tint" aria-hidden="true"></span>
+        <span class="news-video-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>RuTube ↗</span>
+        <span class="news-video-duration">6:50</span>
+        <span class="news-video-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+      </div>
+      <div class="news-video-caption">Проверка маркировки ТС ПИоТ в чеке<span>Видео к релизу «айлекс.некст» 1.3.155</span></div>
+    </a>
+    <a class="news-video-card size-video news-cat-video" href="https://rutube.ru/video/cd27cf2dcd06608205dd8a0683778d33/" target="_blank" rel="noopener" data-cat="video">
+      <div class="news-video-thumb">
+        <span class="brand-mark brand-mark-tint" aria-hidden="true"></span>
+        <span class="news-video-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>RuTube ↗</span>
+        <span class="news-video-duration">6:24</span>
+        <span class="news-video-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+      </div>
+      <div class="news-video-caption">Автоподстановка МРЦ для табака<span>Видео к релизу «айлекс.некст» 1.3.155</span></div>
+    </a>
   </div>
   <p class="source-note" style="padding:0 4px;margin-top:24px">Новости о релизах и обновлениях программ — от разработчика «ЦОР Айлекс», нашего партнёра.</p>
 </section>
 </main>
+<script>
+(function(){
+  var buttons = document.querySelectorAll('.news-filter');
+  var cards = document.querySelectorAll('#news-grid > [data-cat]');
+  buttons.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      buttons.forEach(function(b){ b.classList.remove('is-active'); b.setAttribute('aria-selected','false'); });
+      btn.classList.add('is-active');
+      btn.setAttribute('aria-selected','true');
+      var f = btn.getAttribute('data-filter');
+      cards.forEach(function(card){
+        var show = f === 'all' || card.getAttribute('data-cat') === f;
+        card.classList.toggle('is-filtered-out', !show);
+      });
+    });
+  });
+})();
+</script>
 <div class="cta-band container case-cta" id="contact">
   <svg class="deco-hatch" style="left:2%;top:6px" viewBox="0 0 110 90" aria-hidden="true">
     <line x1="6" y1="84" x2="26" y2="64"/><line x1="14" y1="84" x2="34" y2="64"/><line x1="22" y1="84" x2="42" y2="64"/>

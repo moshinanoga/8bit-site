@@ -969,48 +969,111 @@ body.tiffany-glow{--accent:#2dd9c4;--accent-2:#4de8d6;--on-accent:#04241d}
 .news-item-body p+p{margin-top:12px}
 .news-item-body a{display:inline-flex;align-items:center;gap:6px;margin-top:14px;color:var(--teal-accent);font-weight:700;font-size:14.5px}
 .news-item-body .source-note{margin-top:14px;font-size:12.5px;color:#6b7690}
-.news-video-card{display:block;margin:22px 0;border-radius:var(--radius-l);overflow:hidden;text-decoration:none;background:#0d1117;box-shadow:var(--shadow-sm);transition:transform .3s,box-shadow .3s}
+
+/* ---------- News: category filter pills ---------- */
+.news-filters{position:relative;z-index:2;margin-top:32px;display:flex;flex-wrap:wrap;gap:10px}
+.news-filter{appearance:none;border:1.5px solid var(--glass-border);background:var(--glass-bg);backdrop-filter:blur(12px);color:var(--ink-soft);padding:10px 20px;border-radius:99px;font-family:var(--font-ui);font-size:14.5px;font-weight:700;cursor:pointer;transition:background .3s,border-color .3s,color .3s,transform .3s}
+.news-filter:hover{transform:translateY(-2px);border-color:var(--teal-accent)}
+.news-filter.is-active{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+:root[data-theme="dark"] .news-filter.is-active,body.dark .news-filter.is-active{background:var(--teal-accent);color:#04241d;border-color:var(--teal-accent)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .news-filter.is-active{background:var(--teal-accent);color:#04241d;border-color:var(--teal-accent)}}
+
+/* ---------- News: editorial grid + card types ---------- */
+.news-editorial{margin-top:36px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:20px}
+.news-card{position:relative;overflow:hidden;min-width:0;display:flex;flex-direction:column;padding:26px;border-radius:var(--radius-l);background:#161a1e;color:#fff;text-decoration:none;box-shadow:var(--shadow-sm);transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s,opacity .3s}
+.news-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.is-filtered-out{display:none}
+.news-card time{position:relative;z-index:1;font-family:var(--font-mono);font-size:13px;color:#8b96b8}
+.news-card .cat{position:relative;z-index:1;margin-top:12px;width:fit-content;padding:5px 10px;border-radius:99px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);font-family:var(--font-mono);font-size:12.5px;color:var(--news-accent,var(--teal-accent))}
+.news-card h3{position:relative;z-index:1;margin-top:16px;font-weight:800;font-family:var(--font-ui);line-height:1.3;letter-spacing:-.01em}
+.news-card p{position:relative;z-index:1;margin-top:10px;font-size:14.5px;line-height:1.6;color:#c4cde6;flex:1}
+.news-card b{position:relative;z-index:1;margin-top:18px;display:inline-flex;align-items:center;gap:6px;color:var(--news-accent,var(--teal-accent));font-weight:700;font-size:14px}
+.news-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--news-accent,var(--teal-accent));opacity:.85}
+/* size variants — editorial rhythm instead of a uniform grid of equal boxes.
+   Selectors target the size-* class alone (not `.news-card.size-*`) because
+   video items use a different base class (.news-video-card) but share the
+   same grid and need the same column-span placement. */
+.size-featured{grid-column:1 / -1}
+.news-card.size-featured{flex-direction:row;align-items:flex-end;gap:32px;padding:clamp(28px,3vw,44px)}
+.news-card.size-featured .news-card-copy{flex:1;min-width:0}
+.news-card.size-featured h3{font-size:clamp(22px,2.4vw,32px);max-width:640px}
+.news-card.size-featured p{max-width:560px;font-size:15.5px}
+.size-medium{grid-column:span 3}
+.news-card.size-medium h3{font-size:19px}
+.size-compact{grid-column:span 2}
+.news-card.size-compact h3{font-size:16.5px}
+.news-card.size-compact p{display:none}
+.size-video{grid-column:span 3;padding:0}
+@media(max-width:980px){.news-card.size-featured{flex-direction:column;align-items:stretch}.size-medium,.size-compact,.size-video{grid-column:1/-1}}
+
+/* per-category decorative watermark — a distinct motif per category so the
+   grid doesn't read as one repeated card design, kept faint so it never
+   fights the text for attention */
+.news-card .cat-motif{position:absolute;top:0;right:0;width:140px;height:140px;opacity:.14;pointer-events:none;color:var(--news-accent,var(--teal-accent))}
+.news-card.size-featured .cat-motif{width:220px;height:220px}
+
+/* ---------- News video card (used standalone in the grid, and inside an article body) ---------- */
+.news-video-card{position:relative;display:block;height:100%;border-radius:var(--radius-l);overflow:hidden;text-decoration:none;background:#0d1117;box-shadow:var(--shadow-sm);transition:transform .3s,box-shadow .3s}
+.case-body-text .news-video-card{margin:22px 0;height:auto}
 .news-video-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
 .news-video-thumb{position:relative;aspect-ratio:16/9;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 26% 24%,color-mix(in srgb,var(--news-accent,var(--teal-accent)) 55%,transparent),transparent 62%),linear-gradient(135deg,#151a20,#1c222a 55%,#0d1117)}
 .news-video-thumb::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.14) 1.5px,transparent 1.5px);background-size:22px 22px;opacity:.5}
 .news-video-thumb .brand-mark{position:absolute;left:20px;top:18px;width:30px;height:30px;object-fit:contain;opacity:.9}
-.news-video-play{position:relative;z-index:1;width:76px;height:76px;border-radius:50%;background:var(--teal-accent);display:grid;place-items:center;box-shadow:0 14px 34px rgba(45,217,196,.4);transition:transform .3s}
-.news-video-card:hover .news-video-play{transform:scale(1.08)}
-.news-video-play svg{width:26px;height:26px;fill:#04241d;margin-left:4px}
-.news-video-badge{position:absolute;z-index:1;top:16px;right:16px;padding:6px 13px;border-radius:99px;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);color:#fff;font-family:var(--font-mono);font-size:12px;font-weight:600;display:flex;align-items:center;gap:6px}
+.news-video-play{position:relative;z-index:1;width:64px;height:64px;border-radius:50%;background:var(--teal-accent);display:grid;place-items:center;box-shadow:0 14px 34px rgba(45,217,196,.4);transition:transform .3s}
+.news-video-card:hover .news-video-play{transform:scale(1.1)}
+.news-video-play svg{width:22px;height:22px;fill:#04241d;margin-left:3px}
+.news-video-badge{position:absolute;z-index:1;top:14px;right:14px;padding:6px 13px;border-radius:99px;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);color:#fff;font-family:var(--font-mono);font-size:12px;font-weight:600;display:flex;align-items:center;gap:6px}
+.news-video-duration{position:absolute;z-index:1;bottom:14px;right:14px;padding:4px 10px;border-radius:6px;background:rgba(0,0,0,.65);color:#fff;font-family:var(--font-mono);font-size:11.5px;font-weight:600}
 .news-video-caption{padding:16px 20px;color:#fff;font-weight:700;font-size:15px;line-height:1.4;background:#161a1e}
+.news-video-caption span{display:block;margin-top:6px;font-weight:500;font-size:13px;color:#8b96b8}
 
-/* ---------- News: index grid + article page ---------- */
-.news-grid{margin-top:8px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,380px));gap:20px}
-.news-card{position:relative;overflow:hidden;display:flex;flex-direction:column;padding:26px;border-radius:var(--radius-l);background:#161a1e;color:#fff;text-decoration:none;box-shadow:var(--shadow-sm);transition:transform .3s,box-shadow .3s}
-.news-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
-.news-card time{font-family:var(--font-mono);font-size:13px;color:#8b96b8}
-.news-card .cat{margin-top:12px;width:fit-content;padding:5px 10px;border-radius:99px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);font-family:var(--font-mono);font-size:12.5px;color:var(--teal-accent)}
-.news-card h3{margin-top:16px;font-size:19px;font-weight:700;font-family:'Unbounded',var(--font-ui);line-height:1.35;letter-spacing:-.01em}
-.news-card p{margin-top:10px;font-size:14.5px;line-height:1.6;color:#c4cde6;flex:1}
-.news-card b{margin-top:18px;display:inline-flex;align-items:center;gap:6px;color:var(--teal-accent);font-weight:700;font-size:14px}
+/* legacy accordion styles (still used by the <details> pattern on some pages) */
+.news-item{border-bottom:1px solid rgba(255,255,255,.08)}
+.news-item:last-child{border-bottom:0}
+.news-item summary{display:grid;grid-template-columns:120px 140px 1fr 30px;align-items:center;gap:16px;padding:22px 4px;color:#fff;transition:.3s;cursor:pointer;list-style:none}
+.news-item summary::-webkit-details-marker{display:none}
+.news-item summary:hover{padding-left:12px;color:var(--teal-accent)}
+.news-item summary:hover b{color:var(--teal-accent)}
+.news-item time,.news-item .cat{font-family:var(--font-mono);font-size:13px;color:#8b96b8}
+.news-item .cat{padding:5px 10px;border-radius:99px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);width:fit-content;transition:background .3s,border-color .3s}
+.news-item summary:hover .cat{background:rgba(45,217,196,.12);border-color:var(--teal-accent)}
+.news-item h3{font-size:clamp(16px,1.6vw,20px);font-weight:600;letter-spacing:-.01em;font-family:var(--font-ui)}
+.news-item b{display:inline-block;font-size:18px;font-weight:400;color:#8b96b8;transition:transform .3s cubic-bezier(.22,1,.36,1),color .3s}
+.news-item[open] summary b{transform:rotate(180deg)}
+.news-item-body{padding:0 4px 26px;max-width:760px}
+.news-item-body p{font-size:15.5px;line-height:1.7;color:#c4cde6}
+.news-item-body p+p{margin-top:12px}
+.news-item-body a{display:inline-flex;align-items:center;gap:6px;margin-top:14px;color:var(--teal-accent);font-weight:700;font-size:14.5px}
+.news-item-body .source-note{margin-top:14px;font-size:12.5px;color:#6b7690}
+
+/* ---------- News: article page meta / related ---------- */
+.news-breadcrumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:18px;font-family:var(--font-mono);font-size:13px;color:var(--muted)}
+.news-breadcrumbs a{color:var(--muted);transition:color .3s}
+.news-breadcrumbs a:hover{color:var(--news-accent,var(--teal-accent))}
+.news-breadcrumbs span{color:var(--ink-soft)}
 .news-article-meta{display:flex;align-items:center;gap:12px;margin-bottom:16px}
-.news-article-meta .cat{padding:5px 12px;border-radius:99px;background:var(--glass-bg);border:1px solid var(--glass-border);font-family:var(--font-mono);font-size:12.5px;color:var(--teal-accent)}
+.news-article-meta .cat{padding:5px 12px;border-radius:99px;background:var(--glass-bg);border:1px solid var(--glass-border);font-family:var(--font-mono);font-size:12.5px;color:var(--news-accent,var(--teal-accent))}
 .news-article-meta time{font-family:var(--font-mono);font-size:13px;color:var(--muted)}
-.news-related{margin-top:56px;padding-top:32px;border-top:1px solid var(--line);max-width:760px}
+.article-cover{position:relative;overflow:hidden;margin:24px 0 8px;height:180px;border-radius:var(--radius-l);display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,color-mix(in srgb,var(--news-accent,var(--teal-accent)) 22%,var(--surface-2)),var(--surface-2) 70%)}
+.article-cover svg{width:64px;height:64px;color:var(--news-accent,var(--teal-accent));opacity:.9}
+.article-cover .cat-motif{position:absolute;inset:0;width:100%;height:100%;opacity:.16;color:var(--news-accent,var(--teal-accent))}
+.article-quote{position:relative;margin:26px 0;padding:6px 0 6px 26px;border-left:4px solid var(--news-accent,var(--teal-accent));font-size:22px;line-height:1.5;font-weight:700;color:var(--ink);max-width:100%}
+.news-related{margin-top:56px;padding-top:32px;border-top:1px solid var(--line);max-width:100%}
 .news-related-label{display:block;font-family:var(--font-mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
 .news-related-item{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);font-weight:600;color:var(--ink)}
 .news-related-item:last-child{border-bottom:0}
 .news-related-item b{font-weight:500;font-size:13.5px;color:var(--muted);flex-shrink:0;font-family:var(--font-mono)}
 @media(hover:hover) and (pointer:fine){.news-related-item:hover{color:var(--news-accent,var(--teal-accent))}}
 
-/* per-category accent (default teal) — set on <body> so it reaches the hero,
-   category chips, video card and related-news underline consistently, without
-   touching the sitewide brand teal used for buttons/CTAs elsewhere */
-body.news-cat-law{--news-accent:#f5a623}
-body.news-cat-pay{--news-accent:#8b7bff}
-body.news-cat-cert{--news-accent:#22c55e}
-.news-article-meta .cat{color:var(--news-accent,var(--teal-accent));border-color:color-mix(in srgb,var(--news-accent,var(--teal-accent)) 45%,var(--glass-border))}
-.news-card .cat{color:var(--news-accent,var(--teal-accent))}
-.news-card.news-cat-law{--news-accent:#f5a623}
-.news-card.news-cat-pay{--news-accent:#8b7bff}
-.news-card.news-cat-cert{--news-accent:#22c55e}
-.news-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--news-accent,var(--teal-accent));opacity:.85}
+/* per-category accent — set on <body> (article pages) or the card itself
+   (index grid) so it reaches the hero, chips, video card, cover and related-
+   news underline consistently, without touching the sitewide brand teal used
+   for buttons/CTAs elsewhere. Default (no class) stays brand teal. */
+body.news-cat-general,.news-cat-general{--news-accent:#f5a623}
+body.news-cat-update,.news-cat-update{--news-accent:#2dd9c4}
+body.news-cat-company,.news-cat-company{--news-accent:#5b8cff}
+body.news-cat-useful,.news-cat-useful{--news-accent:#38bdf8}
+body.news-cat-video,.news-cat-video{--news-accent:#ec4899}
 .side-deco.deco-blob{background:radial-gradient(circle,var(--news-accent,var(--teal-accent)),transparent 68%)}
 .news-lead{font-size:19px;line-height:1.6;color:var(--ink-soft);max-width:720px;margin-bottom:8px}
 .article-stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin:22px 0;max-width:760px}

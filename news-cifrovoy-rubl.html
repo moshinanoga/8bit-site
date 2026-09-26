@@ -11,7 +11,7 @@
 (function(){document.documentElement.setAttribute('data-theme','light');})();
 </script>
 </head>
-<body class="news-cat-pay">
+<body class="news-cat-general">
 <div class="ambient-blobs" aria-hidden="true"><span class="blob blob-1"></span><span class="blob blob-2"></span><span class="blob blob-3"></span></div>
 
 <header class="site-header">
@@ -94,7 +94,9 @@
 <main><section class="case-hero news-article-hero" style="padding-bottom:20px">
   <div class="side-deco deco-blob right" aria-hidden="true"></div>
   <div class="container">
-    <a class="back reveal" href="news.html">← Все новости</a>
+    <nav class="news-breadcrumbs reveal" aria-label="Хлебные крошки">
+      <a href="index.html">Главная</a><span>/</span><a href="news.html">Новости и видео</a><span>/</span><span>Общие новости</span>
+    </nav>
     <div class="news-article-meta reveal">
       <span class="cat">Оплата</span>
       <time>07.09.2026</time>
@@ -105,6 +107,9 @@
 </section>
 
 <section class="container case-block news-article-body" style="padding-top:0">
+  <div class="article-cover reveal" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg>
+  </div>
   <div class="case-body-text reveal" style="max-width:760px">
     <p>С 1 сентября 2026 года в России начался первый этап обязательного приёма цифрового рубля (Федеральный закон № 248-ФЗ от 23.07.2025). Обязанность распространяется на торговые компании с выручкой за 2025 год от 120 млн ₽, обслуживающиеся в системно значимой кредитной организации.</p>
     <div class="article-stat-row">
@@ -119,10 +124,11 @@
       <li><i><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></i><span><b>«Торговое предприятие 7»</b> — поддержка в модуле «Кассир» появится с 58 релиза.</span></li>
       <li><i><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></i><span><b>«айлекс.некст»</b> — уже доступно на терминалах Сбербанка и ККТ Нева-01-Ф / СМАРТПОС-Ф при версии ПО 1.3.128 и выше.</span></li>
     </ul>
+    <p class="article-quote">Штраф за отказ принимать цифровой рубль доходит до 50 000 ₽ для юрлиц — дороже, чем просто вовремя обновить кассу.</p>
     <p>Не откладывайте подключение на последний день — обновим вашу кассу и проверим приём оплаты заранее, чтобы точка работала без сбоев.</p>
   </div>
   <div class="news-related reveal">
-    <span class="news-related-label">Другие новости</span>
+    <span class="news-related-label">Читайте также</span>
     <a class="news-related-item" href="news-ileks-next-1-3-155.html"><span>Релиз «айлекс.некст» 1.3.155: проверка маркировки в чеке</span><b>24.09.2026 →</b></a>
     <a class="news-related-item" href="news-etrn-torgovoe-predpriyatie-7.html"><span>ЭТрН стала обязательной для большинства перевозок с 1 сентября</span><b>08.09.2026 →</b></a>
     <a class="news-related-item" href="news-tspiot-sertifikaciya.html"><span>«айлекс.некст» прошёл сертификацию для работы с ТС ПИоТ</span><b>04.09.2026 →</b></a>
